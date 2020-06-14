@@ -4,3 +4,4 @@ class EmailInput extends Input {
 		this.input.type = 'email';
 		}
 	}
+	
