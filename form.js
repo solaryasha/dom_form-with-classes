@@ -32,22 +32,9 @@ class Form {
 	#submitHandler = event => {
 		event.preventDefault();
 		const collection = event.target.elements;
-		// console.log(collection);
 
-		let isValid = true;
-		const inputs = [ ...collection ]
-			.reduce((accum, {name, value}) => {
-				if (!value || !name) {
-					return accum;
-				}
-				accum[name] = value;
-
-				return accum
-			}, {});
-
-		
-
-		isValid = this.#checkvalidity(inputs);
+		const inputs = this.#getDate(collection);
+		let isValid = this.#checkvalidity(inputs);
 		
 		if (!isValid) {
 			return;
@@ -56,6 +43,18 @@ class Form {
 		this.submitCallback(inputs);
 		
 	}
+	#getDate = collection => {
+		return [ ...collection ]
+		.reduce((accum, {name, value}) => {
+			if (!value || !name) {
+				return accum;
+			}
+			accum[name] = value;
+			
+			return accum
+		}, {});
+	}
+
 
 	#checkvalidity = input => {
 		let isValid = true;
