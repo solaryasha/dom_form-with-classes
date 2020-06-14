@@ -1,10 +1,10 @@
 class Form {
 	constructor() {
 		this.form = document.createElement('form');
-		this.submit = this.form.addEventListener('submit', this.submitHandler);
+		this.submit = this.form.addEventListener('submit', this.#submitHandler);
 	}
 
-	addButton() {
+	#addButton = () => {
 		const button = document.createElement('button');
 		button.type = 'submit'
 		button.textContent = 'Press me';
@@ -18,7 +18,6 @@ class Form {
 	
 	setSubmitCallback(func) {
 		this.submitCallback = func;
-		console.log(this.submitCallback)
 	}
 	
 	setValidationErrorCallback(func) {
@@ -26,28 +25,49 @@ class Form {
 	}
 
 	render(wrapper) {
-		this.addButton();
+		this.#addButton();
 		wrapper.append(this.form);
 	}
 	
-	submitHandler = event => {
+	#submitHandler = event => {
 		event.preventDefault();
-		let inputs = event.target.elements;
-		this.submitCallback((this.getdata(inputs)));
+		const collection = event.target.elements;
+		// console.log(collection);
+
+		let isValid = true;
+		const inputs = [ ...collection ]
+			.reduce((accum, {name, value}) => {
+				if (!value || !name) {
+					return accum;
+				}
+				accum[name] = value;
+
+				return accum
+			}, {});
+
+		
+
+		isValid = this.#checkvalidity(inputs);
+		
+		if (!isValid) {
+			return;
+		}
+		
+		this.submitCallback(inputs);
 		
 	}
 
-	getdata = (collection) => {
-		 const storage = {};
+	#checkvalidity = input => {
+		let isValid = true;
+		const isInvalid = (field , value) => (value.length < 4 );
 
-		for (let {name, value} of collection) {
-			if (!name || !value) {
-				continue;
-			}
+		for (const [name, value] of Object.entries(input)) {
+			if (isInvalid(name, value)) {
 
-			storage[name] = value;
+				this.validationError({getName: () => name })
+				isValid = false;
+			}	
 		}
-
-		return storage;
-	}
+		return isValid;
+	} 
 }
