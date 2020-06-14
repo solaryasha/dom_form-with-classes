@@ -1,16 +1,6 @@
-class EmailInput {
+class EmailInput extends Input {
 	constructor() {
-		this.input = document.createElement('input');
+		super();
 		this.input.type = 'email';
-	}
-
-	setName(name) {
-		this.input.name = name;
-	}
-
-	setRequired(value) {
-		if (value) {
-			this.input.required = value;
 		}
 	}
-}

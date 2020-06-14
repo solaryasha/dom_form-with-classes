@@ -1,10 +1,6 @@
-class PhoneInput {
+class PhoneInput extends Input {
   constructor() {
-		this.input = document.createElement('input');
+		super();
 		this.input.type = 'phone';
-	}
-
-	setName(name) {
-		this.input.name = name;
 	}
 }
