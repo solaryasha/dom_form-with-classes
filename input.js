@@ -1,13 +1,13 @@
 class Input {
-	constructor() {
-		this.input = document.createElement('input');
-	}
+  constructor() {
+    this.input = document.createElement('input');
+  }
 
-	setName(name) {
-		this.input.name = name;
-	}
+  setName(name) {
+    this.input.name = name;
+  }
 
-	setRequired(value) {
-		this.input.required = value;
-	}
+  setRequired(value) {
+    this.input.required = value;
+  }
 }

@@ -1,7 +1,7 @@
 class EmailInput extends Input {
-	constructor() {
-		super();
-		this.input.type = 'email';
-	}
+  constructor() {
+    super();
+    this.input.type = 'email';
+  }
 }
-	
+  
