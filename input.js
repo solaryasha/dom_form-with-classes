@@ -1,6 +1,6 @@
 class Input {
 	constructor() {
-			this.input = document.createElement('input');
+		this.input = document.createElement('input');
 	}
 
 	setName(name) {

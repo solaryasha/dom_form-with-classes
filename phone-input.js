@@ -1,5 +1,5 @@
 class PhoneInput extends Input {
-  constructor() {
+	constructor() {
 		super();
 		this.input.type = 'phone';
 	}
